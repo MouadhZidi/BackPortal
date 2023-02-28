@@ -134,19 +134,64 @@ public class NOTES_EVENEMENTSController {
 		}
 	  @CrossOrigin
 	  @PostMapping("/createevent")
-	  public ResponseEntity<HttpStatus> createDemande(@RequestParam("file") MultipartFile file,@RequestParam("image") MultipartFile image,@RequestParam("event") String event) throws IOException {	        
-		  NOTES_EVENEMENTS even = new ObjectMapper().readValue(event, NOTES_EVENEMENTS.class);
-			even.setFichier_joint(file.getBytes());
-			even.setFile_name(file.getOriginalFilename());
-			even.setContent_type(file.getContentType());
-			even.setPath("DB");
-			even.setIMAGE_EVEN(image.getBytes());
-			even.setFile_name_i(image.getOriginalFilename());
-			even.setContent_type_i(image.getContentType());
-			even.setPath_i("DB");
-			dao.save(even);	   
+	  public ResponseEntity<HttpStatus> createDemande(@RequestParam(name="file",required = false)  MultipartFile file,@RequestParam(name="image",required = false) MultipartFile image,@RequestParam("event") String event) throws IOException {	        
+		  
+		  
+		  
+		  
+		  if ( image == null && file ==null) {
+		        System.out.println("no image and no file");
+				  NOTES_EVENEMENTS even = new ObjectMapper().readValue(event, NOTES_EVENEMENTS.class);
 
-	    	return  ResponseEntity.ok(HttpStatus.OK);
+				  dao.save(even);	
+			    	return  ResponseEntity.ok(HttpStatus.OK);
+
+		  }
+		  
+		  
+		  else if (file == null ) {
+		        System.out.println("no file");
+		        NOTES_EVENEMENTS even = new ObjectMapper().readValue(event, NOTES_EVENEMENTS.class);
+				even.setIMAGE_EVEN(image.getBytes());
+				even.setFile_name_i(image.getOriginalFilename());
+				even.setContent_type_i(image.getContentType());
+				even.setPath_i("DB");
+				dao.save(even);	   
+
+		    	return  ResponseEntity.ok(HttpStatus.OK);
+		        
+		    } 
+		  else if (image == null) {
+		        System.out.println("no image");
+
+			  NOTES_EVENEMENTS even = new ObjectMapper().readValue(event, NOTES_EVENEMENTS.class);
+				even.setFichier_joint(file.getBytes());
+				even.setFile_name(file.getOriginalFilename());
+				even.setContent_type(file.getContentType());
+				even.setPath("DB");
+			
+				dao.save(even);	   
+
+		    	return  ResponseEntity.ok(HttpStatus.OK);
+		  }
+		  
+		  else {
+		    	  NOTES_EVENEMENTS even = new ObjectMapper().readValue(event, NOTES_EVENEMENTS.class);
+					even.setFichier_joint(file.getBytes());
+					even.setFile_name(file.getOriginalFilename());
+					even.setContent_type(file.getContentType());
+					even.setPath("DB");
+					even.setIMAGE_EVEN(image.getBytes());
+					even.setFile_name_i(image.getOriginalFilename());
+					even.setContent_type_i(image.getContentType());
+					even.setPath_i("DB");
+					dao.save(even);	   
+
+			    	return  ResponseEntity.ok(HttpStatus.OK);
+		    }
+		  
+		  
+		
 	    
 	    
 	    
