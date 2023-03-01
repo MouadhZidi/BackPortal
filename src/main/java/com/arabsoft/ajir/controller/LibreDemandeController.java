@@ -35,6 +35,7 @@ import com.arabsoft.ajir.dao.TitreFormationDao;
 import com.arabsoft.ajir.dao.TypeAutorisationDao;
 import com.arabsoft.ajir.dao.TypeFormationDao;
 import com.arabsoft.ajir.dao.TypePretDao;
+import com.arabsoft.ajir.entities.CalPersPK;
 import com.arabsoft.ajir.entities.Cal_Pers;
 import com.arabsoft.ajir.entities.Decision;
 import com.arabsoft.ajir.entities.Groupe_pret;
@@ -402,6 +403,17 @@ System.out.println(d);
 		  
 		  
 	  }
+	  
+	  @PostMapping("/getcngbyid")
+	  public Cal_Pers getcngbyid(@RequestBody CalPersPK id ) {
+		  
+		  String codSoc = id.getCod_soc();
+			String matPers = id.getMat_pers();
+		  long months=id.getMonths();
+			long years=id.getYears();
+			long days=id.getDays();
+				
+		return calPersDao.getListConjebyid(codSoc,matPers,days,months,years);}
 	
 
 }
