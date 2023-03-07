@@ -21,15 +21,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.arabsoft.ajir.dao.PersonnelRep;
 import com.arabsoft.ajir.dao.PhotoPersDao;
+import com.arabsoft.ajir.dao.RolePortailDAO;
+import com.arabsoft.ajir.entities.Absanteisme;
 import com.arabsoft.ajir.entities.Libre_demandeBis;
 import com.arabsoft.ajir.entities.PHOTO_PERS;
 import com.arabsoft.ajir.entities.Personnel;
+import com.arabsoft.ajir.entities.RolePortail;
 import com.arabsoft.ajir.sevices.PersonnelService;
 @CrossOrigin("*")
 @RestController
 @RequestMapping(value="/infoPers")
 public class PersonnelControler {
 
+	@Autowired
+	RolePortailDAO portailDAO;
+	
+	
 	@Autowired
 	PersonnelService personnelService;
 	@Autowired
@@ -45,6 +52,12 @@ public class PersonnelControler {
 		return this.personnelService.getpersInfo(codSoc, matPers);
 	}
 	
+	
+	@GetMapping("/RolePortail")
+	public List<RolePortail> GetRolePortail(){
+		return this.portailDAO.GetRolePortail();
+	
+	}
 	
 	@GetMapping("/getPers/{codSoc}/{matPaers}")
 	public Personnel getInfosPerse(@PathVariable("codSoc") String c,@PathVariable("matPaers") String p) {

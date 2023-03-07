@@ -189,6 +189,7 @@ public class Personnel {
 	private List<POSSEDE> possede;
 	@Column(insertable = false, updatable = false)
 
+	@Transient
 	private String lastsoldecng;
 	
 
