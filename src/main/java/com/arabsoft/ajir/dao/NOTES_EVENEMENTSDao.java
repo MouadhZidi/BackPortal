@@ -21,29 +21,25 @@ public interface NOTES_EVENEMENTSDao extends JpaRepository<NOTES_EVENEMENTS, Lon
 			+ "  path,\r\n"
 			+ "  typ_droit,\r\n"
 		
-			+ "  from NOTES_EVENEMENTS\r\n"
+			+ "  from NOTES_EVENEMENTS order by date_even DESC \r\n"
 			+ "",nativeQuery=true)
 	public List<NOTES_EVENEMENTS> getNOTES_EVENEMENTS();
+	
+	
 	
 	@Query(value="select e from NOTES_EVENEMENTS e where e.id_evenement=:x")
 	public NOTES_EVENEMENTS get(@Param("x") long x);
 	
 	
-	@Query(value="select p from NOTES_EVENEMENTS p where date_expiration > sysdate")
+	@Query(value="Select * \r\n "
+			+ "  from NOTES_EVENEMENTS e where date_expiration > sysdate\r\n"
+			+ " order by e.date_even DESC\r\n"
+			,nativeQuery = true)
 	public List<NOTES_EVENEMENTS> getD();
-	@Query(value="  Select id_evenement ,\r\n"
-			+ "  e.libelle,\r\n"
-			+ "  e.date_even,\r\n"
-			+ "  e.date_expiration,\r\n"
-			+ "  e.fichier_joint,\r\n"
-			+ "  e.typ_even,\r\n"
-			+ "  e.file_name,\r\n"
-			+ "  e.content_type, \r\n"
-			+ "  e.path,\r\n"
-			+ "  e.typ_droit\r\n"
-		
-			+ "  from NOTES_EVENEMENTS e\r\n"
-			+ "",nativeQuery=true)
+	
+	
+	
+	@Query(value=" Select * from NOTES_EVENEMENTS ",nativeQuery=true)
 	public List<NOTES_EVENEMENTS> getNOTES_EVENEMENTS22();
 
 }

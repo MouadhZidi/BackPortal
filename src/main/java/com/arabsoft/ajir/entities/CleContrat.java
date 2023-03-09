@@ -11,7 +11,7 @@ public class CleContrat  implements Serializable{
 	private String cod_soc;
 	private String mat_pers;
 	private Integer num_contrat;
-	private String getCod_soc() {
+	public String getCod_soc() {
 		return cod_soc;
 	}
 	public void setCod_soc(String cod_soc) {
